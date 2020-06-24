@@ -10,8 +10,6 @@ import (
 	"strings"
 )
 
-const maxSequenceLen = 300
-
 // we intern all words into an array, and reference to it with an int index
 var words = []string{"the"}
 var keys = map[string]int{
@@ -58,17 +56,22 @@ func (fc *frequencyChain) predict(last int) int {
 	panic("unreachable!")
 }
 
-func (fc *frequencyChain) generate(seed string) string {
+func (fc *frequencyChain) generate(length int) string {
+	seed := getWord(rand.Intn(len(words)))
+	return fc.generateFrom(seed, length)
+}
+
+func (fc *frequencyChain) generateFrom(seed string, length int) string {
 	defer newTimer().finish("generate")
 
 	last := makeWord(seed)
-	sequence := make([]int, maxSequenceLen)
+	sequence := make([]int, length)
 	for i := range sequence {
 		last = fc.predict(last)
 		sequence[i] = last
 	}
 
-	unkeyedSequence := make([]string, maxSequenceLen)
+	unkeyedSequence := make([]string, length)
 	for i, key := range sequence {
 		unkeyedSequence[i] = getWord(key)
 	}
@@ -117,7 +120,7 @@ func normalize(chunk string) []int {
 	reg := regexp.MustCompile(`\[(.*?)\]\(.*?\)`)
 	chunk = reg.ReplaceAllString(chunk, "$1")
 
-	reg = regexp.MustCompile(`[\[\]\(\)\{\}_*\"]+`)
+	reg = regexp.MustCompile(`[\[\]\(\)\{\}_*\"]+|\d\.`)
 	chunk = reg.ReplaceAllString(chunk, "")
 
 	reg = regexp.MustCompile(`([\.,:;?!]) `)

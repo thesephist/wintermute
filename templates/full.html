@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="https://thesephist.com/css/main.css" />
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif:400,400i,700,700i&display=swap"
+        rel="stylesheet" />
+    <title>{{ .Title }} | thesephist.com</title>
+    <link rel="canonical" href="https://fake.thesephist.com/full" />
+</head>
+
+<body class="type-page">
+    <header>
+        <div class="overlay">
+            <div class="home">
+                <a href="/full">thesephist<span class="desktop">.com</span></a>
+            </div>
+            <nav>
+                <a href="https://thesephist.com/posts/">posts</a>
+                <a href="https://thesephist.com/projects/">projects</a>
+                <a class="desktop" href="https://thesephist.com/#contact">contact</a>
+                <a class="desktop" href="https://twitter.com/thesephist">tweets</a>
+            </nav>
+        </div>
+    </header>
+
+    <main aria-role="main">
+        <div class="hero inverted">
+            <div class="overlay">
+                <h1>{{ .Title }}</h1>
+            </div>
+            <div class="meta overlay">
+                <div class="meta-item date desktop" itemprop="datepublished">{{ .Date.Format "2 January 2006" }}</div>
+                <div class="meta-item date mobile" itemprop="datepublished">{{ .Date.Format "2 Jan 2006" }}</div>
+                <div class="meta-item location" itemprop="place">West Lafayette, IN</div>
+                <div class="meta-item readtime" itemprop="duration">4 mins</div>
+            </div>
+        </div>
+        <article class="overlay">
+
+            <p>
+                <em>This is a fake blog post created with
+                    <a href="/" target="_blank">Wintermute</a>,
+                    an algorithm to create computer-generated facsimiles of my blog posts.</em>
+            </p>
+
+            {{ range .ContentLines }}
+            {{ if eq . "--- " }}
+            <hr />
+            {{ else }}
+            <p>{{ . }}</p>
+            {{ end }}
+            {{ end }}
+
+            <hr />
+            <p>
+                If you enjoyed this piece, you might also enjoy
+
+                my next post,
+                <a href="/full"><em>{{ .NextTitle }}</em></a>.
+
+            </p>
+            <p>Have a comment or response? You can <a href="https://thesephist.com/#contact">email me.</a></p>
+        </article>
+    </main>
+
+
+
+    <footer>
+        <div class="overlay">
+            <div class="left">
+                <p>- Linus, MMXX</p>
+            </div>
+            <div class="right">
+                <span class="square"></span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

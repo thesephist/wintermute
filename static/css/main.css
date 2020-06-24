@@ -1,0 +1,115 @@
+html,
+body {
+    margin: 0;
+    background: #e4e3ea;
+    --paper-accent: #487d69;
+}
+
+body,
+input,
+button {
+    font-family: 'IBM Plex Serif', 'Georgia', serif;
+}
+
+main {
+    margin: 1em auto;
+    max-width: 750px;
+    width: 96%;
+}
+
+button,
+input {
+    font-size: 1em;
+}
+
+header,
+section {
+    margin-bottom: 1em;
+}
+
+input.invalid {
+    border: 2px solid var(--paper-accent);
+}
+
+input {
+    min-width: 0;
+    width: 0;
+    flex-grow: 1;
+}
+
+p {
+    line-height: 1.5em;
+}
+
+header h1 {
+    margin: .4em 0;
+}
+
+.buttonGroup,
+.item,
+.left,
+.right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.buttonGroup .left .paper {
+    margin-right: 1em;
+}
+
+.buttonGroup .right {
+    margin-left: -1em;
+}
+
+.buttonGroup .right .paper {
+    margin-left: 1em;
+}
+
+.buttonGroup .left,
+.seedInput {
+    flex-grow: 1;
+}
+
+a {
+    color: var(--paper-accent)
+}
+
+.accent a {
+    color: var(--paper-background);
+}
+
+.generatedText:empty {
+    padding: 1em;
+}
+
+.generatedText:empty::after {
+    content: 'Generate some writing...';
+    display: block;
+    color: #888;
+}
+
+.fullPageButton {
+    display: inline-block;
+    margin: .2em 0 1em 0;
+}
+
+footer {
+    margin: 2em 0;
+    text-align: left;
+}
+
+.mobile {
+    display: none;
+}
+
+@media only screen and (max-width: 500px) {
+    .mobile {
+        display: initial;
+    }
+
+    .desktop {
+        display: none;
+    }
+}
