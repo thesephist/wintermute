@@ -36,7 +36,7 @@ func makeGenerator(chain frequencyChain) http.HandlerFunc {
 			seed = "the"
 		}
 
-		io.WriteString(w, chain.generateFrom(seed, 150))
+		io.WriteString(w, chain.generateFrom(seed, 100))
 	}
 }
 

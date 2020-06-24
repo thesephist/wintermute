@@ -84,10 +84,38 @@ a {
     padding: 1em;
 }
 
-.generatedText:empty::after {
-    content: 'Generate some writing...';
-    display: block;
-    color: #888;
+.loading {
+    margin: 2em auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes pulse {
+    0%, 20%, 100% {
+        transform: scale(1);
+    }
+    40% {
+        transform: scale(1.2);
+    }
+}
+
+.loading .square {
+    margin: 0 .5em;
+    height: 1.2em;
+    width: 1.2em;
+    padding: 0;
+    border-radius: 50%;
+    animation: pulse .8s infinite;
+}
+
+.loading .square.second {
+    animation-delay: .1s;
+}
+
+.loading .square.third {
+    animation-delay: .2s;
 }
 
 .fullPageButton {
