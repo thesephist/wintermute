@@ -1,0 +1,28 @@
+[Unit]
+Description=wintermute server
+ConditionPathExists=/home/wintermute-user/wintermute/wintermute
+After=network.target
+
+[Service]
+Type=simple
+User=wintermute-user
+LimitNOFILE=256
+
+Restart=on-failure
+RestartSec=10
+StartLimitIntervalSec=60
+
+WorkingDirectory=/home/wintermute-user/wintermute/
+ExecStart=/home/wintermute-user/wintermute/wintermute
+
+# make sure log directory exists and owned by syslog
+PermissionsStartOnly=true
+ExecStartPre=/bin/mkdir -p /var/log/wintermute
+ExecStartPre=/bin/chown syslog:adm /var/log/wintermute
+ExecStartPre=/bin/chmod 755 /var/log/wintermute
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=wintermute
+
+[Install]
+WantedBy=multi-user.target
