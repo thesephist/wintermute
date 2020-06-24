@@ -121,7 +121,7 @@ func normalize(chunk string) []int {
 	reg := regexp.MustCompile(`\[(.*?)\]\(.*?\)`)
 	chunk = reg.ReplaceAllString(chunk, "$1")
 
-	reg = regexp.MustCompile(`[\[\]\(\)\{\}_*\"]+|\d\.`)
+	reg = regexp.MustCompile(`[\[\]\(\)\{\}_*\\\"]+|\d\.`)
 	chunk = reg.ReplaceAllString(chunk, "")
 
 	reg = regexp.MustCompile(`([\.,:;?!]) `)
@@ -206,7 +206,7 @@ func makeChain(corpusDir string) (frequencyChain, error) {
 	}
 
 	for _, entry := range entries {
-		if entry.IsDir() {
+		if entry.IsDir() || strings.HasPrefix(entry.Name(), ".") {
 			continue
 		}
 

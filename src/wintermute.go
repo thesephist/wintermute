@@ -54,14 +54,14 @@ type FullPageTemplateVars struct {
 }
 
 func makeFullPager(chain frequencyChain) http.HandlerFunc {
-	file, err := os.Open("./templates/full.html")
+	file, err := os.Open("./templates/post.html")
 	check(err)
 	defer file.Close()
 
 	part, err := ioutil.ReadAll(file)
 	check(err)
 
-	tmpl, err := template.New("full").Parse(string(part))
+	tmpl, err := template.New("post").Parse(string(part))
 	check(err)
 
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -110,7 +110,7 @@ func start() {
 
 	r.HandleFunc("/", index)
 	r.Methods("GET").Path("/generate").Queries("seed", "{seed}").HandlerFunc(makeGenerator(chain))
-	r.Methods("GET").Path("/full").HandlerFunc(makeFullPager(chain))
+	r.Methods("GET").Path("/post").HandlerFunc(makeFullPager(chain))
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 
 	log.Printf("Wintermute listening on %s\n", srv.Addr)

@@ -41,6 +41,12 @@ header h1 {
     margin: .4em 0;
 }
 
+button[disabled] {
+    cursor: no-drop;
+    opacity: .6;
+    pointer-events: none;
+}
+
 .buttonGroup,
 .item,
 .left,

@@ -63,7 +63,7 @@ class App extends Component {
             <section class="buttonGroup">
                 <div class="left">
                     <input class="paper paper-border-left seedInput" value="${this.seedInput}"
-                        placeholder="the"
+                        placeholder="starting word..."
                         oninput="${this.handleInput}"
                         onkeydown="${evt => {
                             if (evt.key == 'Enter') {
@@ -71,14 +71,14 @@ class App extends Component {
                             }
                         }}"
                         />
-                    <button class="movable accent paper generateButton" onclick="${this.fetch}">Generate</button>
+                    <button class="movable accent paper generateButton" onclick="${this.fetch}"
+                        disabled=${this._isLoading || !this.seedInput ? 'disabled' : ''}>Generate</button>
                 </div>
                 <div class="right">
                     <button class="movable paper paper-border-right"
                         onclick="${() => {
                             this._isShowingHow = true;
                             this.render();
-
                             const closeButton = this.node.querySelector('.closeButton');
                             closeButton && closeButton.focus();
                         }}">
@@ -101,7 +101,7 @@ class App extends Component {
                     </div>`}
                 </div>
                 ${!this._isLoading && this.generatedText ? html`<a class="movable accent paper fullPageButton" target="_blank"
-                    href="/full">Generate a full blog post →</a>` : null}
+                    href="/post">Generate a full blog post →</a>` : null}
             </section>
             <footer>
                 <p>
@@ -109,6 +109,8 @@ class App extends Component {
                     <a target="_blank" href="https://github.com/thesephist/torus">Torus</a>
                     ${'&'}
                     <a target="_blank" href="https://thesephist.github.io/paper.css/">paper.css</a>
+                    and is
+                    <a target="_blank" href="https://github.com/thesephist/wintermute">open-source on GitHub</a>.
                 </p>
             </footer>
             ${this._isShowingHow ? Popup(html`<div class="howItWorks">
