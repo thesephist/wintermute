@@ -12,12 +12,14 @@ import (
 )
 
 // we intern all words into an array, and reference to it with an int index
+// this allows us to operate the markov chain as an int -> int system which is
+// more efficient
 var words = []string{"the"}
 var keys = map[string]int{
 	"the": 0,
 }
 
-// int -> map[int]int
+// int -> map[int]int (really semantically is word -> map[word]int)
 type frequencyChain map[int](map[int]int)
 
 func (fc *frequencyChain) addWord(last, key int) {

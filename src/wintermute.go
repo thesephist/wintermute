@@ -46,7 +46,7 @@ func check(err error) {
 	}
 }
 
-type FullPageTemplateVars struct {
+type fullPageTemplateVars struct {
 	Title        string
 	Date         time.Time
 	ContentLines []string
@@ -69,7 +69,7 @@ func makeFullPager(chain frequencyChain) http.HandlerFunc {
 		nextTitle := strings.ReplaceAll(chain.generate(7), "\n", " ")
 		contentLines := strings.Split(chain.generate(800), "\n")
 
-		vars := FullPageTemplateVars{
+		vars := fullPageTemplateVars{
 			Title:        title,
 			Date:         time.Now(),
 			ContentLines: contentLines,
@@ -83,7 +83,7 @@ func makeFullPager(chain frequencyChain) http.HandlerFunc {
 	}
 }
 
-func start() {
+func main() {
 	chain, err := makeChain("./corpus")
 	if err != nil {
 		log.Fatalf("Could not instantiate chain, %s\n", err.Error())
@@ -115,8 +115,4 @@ func start() {
 
 	log.Printf("Wintermute listening on %s\n", srv.Addr)
 	log.Fatal(srv.ListenAndServe())
-}
-
-func main() {
-	start()
 }
