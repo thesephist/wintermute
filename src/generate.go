@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
 	"math/rand"
@@ -62,7 +63,7 @@ func (fc *frequencyChain) generate(length int) string {
 }
 
 func (fc *frequencyChain) generateFrom(seed string, length int) string {
-	defer newTimer().finish("generate")
+	defer newTimer().finish(fmt.Sprintf("generate (%d)", length))
 
 	last := makeWord(seed)
 	sequence := make([]int, length)
@@ -204,8 +205,7 @@ func makeChain(corpusDir string) (frequencyChain, error) {
 		return nil, err
 	}
 
-	// TODO: only [0:5]
-	for _, entry := range entries[0:5] {
+	for _, entry := range entries {
 		if entry.IsDir() {
 			continue
 		}

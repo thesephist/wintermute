@@ -1,5 +1,5 @@
 # Wintermute
-corpus/*
+# corpus/*
 
 # Binaries for programs and plugins
 *.exe

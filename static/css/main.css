@@ -27,10 +27,6 @@ section {
     margin-bottom: 1em;
 }
 
-input.invalid {
-    border: 2px solid var(--paper-accent);
-}
-
 input {
     min-width: 0;
     width: 0;

@@ -32,6 +32,10 @@ class App extends Component {
     }
 
     fetch() {
+        if (!this.seedInput) {
+            return;
+        }
+
         this._isLoading = true;
         this.render();
 
