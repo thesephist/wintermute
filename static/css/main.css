@@ -56,15 +56,15 @@ header h1 {
 }
 
 .buttonGroup .left .paper {
-    margin-right: 1em;
+    margin-right: .8em;
 }
 
 .buttonGroup .right {
-    margin-left: -1em;
+    margin-left: -.8em;
 }
 
 .buttonGroup .right .paper {
-    margin-left: 1em;
+    margin-left: .8em;
 }
 
 .buttonGroup .left,
@@ -121,6 +121,27 @@ a {
 .fullPageButton {
     display: inline-block;
     margin: .2em 0 1em 0;
+}
+
+.popup-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(255, 255, 255, .75);
+}
+
+.popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.howItWorks {
+    width: 268px;
+    padding-bottom: 1em;
 }
 
 footer {

@@ -11,11 +11,19 @@ function generate(seed) {
         .catch(e => console.error(e));
 }
 
+function Popup(children) {
+    return html`<div class="popup-wrapper">
+        <div class="paper paper-border-top popup">${children}</div>
+    </div>`;
+}
+
 class App extends Component {
     init() {
-        this.seedInput = "the";
+        this.seedInput = "when";
         this.generatedText = '';
+
         this._isLoading = false;
+        this._isShowingHow = false;
 
         this.fetch = this.fetch.bind(this);
         this.handleInput = this.handleInput.bind(this);
@@ -62,7 +70,14 @@ class App extends Component {
                     <button class="movable accent paper generateButton" onclick="${this.fetch}">Generate</button>
                 </div>
                 <div class="right">
-                    <button class="movable paper paper-border-right">
+                    <button class="movable paper paper-border-right"
+                        onclick="${() => {
+                            this._isShowingHow = true;
+                            this.render();
+
+                            const closeButton = this.node.querySelector('.closeButton');
+                            closeButton && closeButton.focus();
+                        }}">
                         <span class="desktop">How does it work</span>?
                     </button>
                 </div>
@@ -86,12 +101,32 @@ class App extends Component {
             </section>
             <footer>
                 <p>
-                    Wintermute powered by
+                    Wintermute is powered by
                     <a target="_blank" href="https://github.com/thesephist/torus">Torus</a>
                     ${'&'}
                     <a target="_blank" href="https://thesephist.github.io/paper.css/">paper.css</a>
                 </p>
             </footer>
+            ${this._isShowingHow ? Popup(html`<div class="howItWorks">
+                <p><strong>How does Wintermute work?</strong></p>
+                <p>
+                    Wintermute creates fake blog post writing with a
+                    <a href="https://en.wikipedia.org/wiki/Markov_chain" target="_blank">Markov Chain</a>
+                    based on my archive of blog posts.
+                </p>
+                <div class="buttonGroup">
+                    <div class="left"></div>
+                    <div class="right">
+                        <a href="https://github.com/thesephist/wintermute" target="_blank"
+                            class="movable paper">See on GitHub</a>
+                        <button class="movable paper closeButton"
+                            onclick="${() => {
+                                this._isShowingHow = false;
+                                this.render();
+                            }}">Close</button>
+                    </div>
+                </div>
+            </div>`) : null}
         </main>`;
     }
 }
